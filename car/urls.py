@@ -1,12 +1,12 @@
 from django.urls import path
-from .views import CarAPIView,CarsAPIView,BrandAPIView,BrandsAPIView,ColorAPIView
+from rest_framework import routers
+from .views import CarAPIViewSet,BrandViewSet,ColorViewSet
 
 
 
-urlpatterns = [
-    path('',CarAPIView.as_view()),
-    path('car/<int:pk>/', CarsAPIView.as_view()),
-    path('brand/', BrandAPIView.as_view()),
-    path('brand/search/<int:pk>/', BrandsAPIView.as_view()),
-    path('color/', ColorAPIView.as_view()),
-]
+
+router = routers.DefaultRouter()
+router.register(r'car', CarAPIViewSet,basename='car')
+router.register(r'brand',BrandViewSet,basename='brand')
+router.register(r'color',ColorViewSet,basename='color')
+urlpatterns = router.urls

@@ -1,35 +1,21 @@
-from rest_framework.generics import ListCreateAPIView,RetrieveUpdateDestroyAPIView
-from rest_framework.permissions import IsAuthenticatedOrReadOnly,IsAuthenticated
-
+from rest_framework import viewsets
+from rest_framework.response import Response
 # Create your views here.
 from .models import Brand,Color,Car
-from .serializers import BrandSerializer,ColorSerializer,CarSerializer
+from .serializers import CarSerializer,BrandSerializer,ColorSerializer
 
 
-class CarAPIView(ListCreateAPIView):
+
+class CarAPIViewSet(viewsets.ModelViewSet):
     queryset = Car.objects.all()
     serializer_class = CarSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
 
 
-class CarsAPIView(RetrieveUpdateDestroyAPIView):   
-    queryset = Car.objects.all()
-    serializer_class = CarSerializer
-    permission_classes = [IsAuthenticated]
-
-
-class BrandAPIView(ListCreateAPIView):
+class BrandViewSet(viewsets.ModelViewSet):
     queryset = Brand.objects.all()
     serializer_class = BrandSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
 
 
-class BrandsAPIView(RetrieveUpdateDestroyAPIView):   
-    queryset = Brand.objects.all()
-    serializer_class = BrandSerializer
-    permission_classes = [IsAuthenticated]
-
-
-class ColorAPIView(ListCreateAPIView):
+class ColorViewSet(viewsets.ModelViewSet):
     queryset = Color.objects.all()
     serializer_class = ColorSerializer
